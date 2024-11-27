@@ -38,12 +38,20 @@ class TestIntelligentOffice(unittest.TestCase):
         mock_servo.assert_called_with(2)
         self.assertFalse(system.blinds_open)
 
-
     @patch.object(SDL_DS3231, "read_datetime")
     @patch.object(IntelligentOffice, "change_servo_angle")
     def test_should_not_open_the_blinds_saturday(self, mock_servo: Mock, mock_time: Mock):
         system = IntelligentOffice()
         mock_time.return_value = datetime(2024, 11, 23, 8, 0)
+        system.manage_blinds_based_on_time()
+        mock_servo.assert_called_with(2)
+        self.assertFalse(system.blinds_open)
+
+    @patch.object(SDL_DS3231, "read_datetime")
+    @patch.object(IntelligentOffice, "change_servo_angle")
+    def test_should_not_open_the_blinds_saturday(self, mock_servo: Mock, mock_time: Mock):
+        system = IntelligentOffice()
+        mock_time.return_value = datetime(2024, 11, 24, 8, 0)
         system.manage_blinds_based_on_time()
         mock_servo.assert_called_with(2)
         self.assertFalse(system.blinds_open)
