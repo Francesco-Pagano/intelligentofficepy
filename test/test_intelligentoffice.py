@@ -49,7 +49,7 @@ class TestIntelligentOffice(unittest.TestCase):
 
     @patch.object(SDL_DS3231, "read_datetime")
     @patch.object(IntelligentOffice, "change_servo_angle")
-    def test_should_not_open_the_blinds_saturday(self, mock_servo: Mock, mock_time: Mock):
+    def test_should_not_open_the_blinds_sunday(self, mock_servo: Mock, mock_time: Mock):
         system = IntelligentOffice()
         mock_time.return_value = datetime(2024, 11, 24, 8, 0)
         system.manage_blinds_based_on_time()
