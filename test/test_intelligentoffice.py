@@ -25,6 +25,6 @@ class TestIntelligentOffice(unittest.TestCase):
     def test_should_open_the_blinds(self, mock_servo: Mock, mock_time: Mock):
         system = IntelligentOffice()
         mock_time.return_value = datetime(2024, 11, 27, 8, 0)
-        time = system.manage_blinds_based_on_time()
+        system.manage_blinds_based_on_time()
         mock_servo.assert_called_with(12)
-        self.assertTrue(time)
+        self.assertTrue(system.blinds_open)
