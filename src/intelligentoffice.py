@@ -61,7 +61,7 @@ class IntelligentOffice:
 
     def manage_blinds_based_on_time(self) -> None:
         current_time = self.rtc.read_datetime()
-        if current_time.weekday() != 5 and 6 <= current_time.hour < 18:  # Added check for Saturday
+        if current_time.weekday() not in [5, 6] and 6 <= current_time.hour < 18:  # Added check for Saturday and Sunday
             self.change_servo_angle(12)
             self.blinds_open = True
         else:
