@@ -73,4 +73,3 @@ class TestIntelligentOffice(unittest.TestCase):
         system.manage_light_level()
         mock_light.assert_called_with(system.LED_PIN, False)
         self.assertFalse(system.light_on)
-

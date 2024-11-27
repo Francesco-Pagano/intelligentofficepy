@@ -93,4 +93,3 @@ class IntelligentOffice:
 
 class IntelligentOfficeError(Exception):
     pass
-
