@@ -19,3 +19,12 @@ class TestIntelligentOffice(unittest.TestCase):
     def test_check_quadrant_occupancy_raises_error(self):
         system = IntelligentOffice()
         self.assertRaises(IntelligentOfficeError, system.check_quadrant_occupancy, -1)
+
+    @patch.object(SDL_DS3231, "read_datetime")
+    @patch.object(IntelligentOffice, "change_servo_angle")
+    def test_should_open_the_blinds(self, mock_servo: Mock, mock_time: Mock):
+        system = IntelligentOffice()
+        mock_time.return_value = datetime(2024, 11, 27, 8, 0)
+        time = system.manage_blinds_based_on_time()
+        mock_servo.assert_called_with(12)
+        self.assertTrue(time)
